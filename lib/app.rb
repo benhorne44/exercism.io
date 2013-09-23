@@ -2,7 +2,7 @@ require 'airbrake'
 require 'exercism'
 require 'sinatra/petroglyph'
 require 'will_paginate'
-require 'will_paginate/mongoid'
+require 'will_paginate/active_record'
 
 require 'app/presenters/workload'
 
@@ -71,7 +71,7 @@ class ExercismApp < Sinatra::Base
     def current_user
       @current_user ||= begin
         if request.cookies['_exercism_login']
-          User.find_by(github_id: request.cookies['_exercism_login'])
+          User.where(github_id: request.cookies['_exercism_login']).first
         else
           Guest.new
         end
