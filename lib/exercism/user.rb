@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   end
 
   def submissions_on(exercise)
-    submissions.order(at: :desc).where(language: exercise.language, slug: exercise.slug)
+    submissions.order('id DESC').where(language: exercise.language, slug: exercise.slug)
   end
 
   def most_recent_submission
