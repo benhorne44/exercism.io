@@ -46,6 +46,7 @@ class SubmissionsTest < Minitest::Test
   end
 
   def teardown
+    super
     clear_cookies
   end
 
@@ -318,7 +319,7 @@ class SubmissionsTest < Minitest::Test
   def test_delete_comment
     submission = generate_attempt.submission
     assert_equal 0, Comment.count
-    comment = Comment.create(user: bob, submission: submission, comment: "ohai")
+    comment = Comment.create(user: bob, submission: submission, body: "ohai")
     login(bob)
     delete "/submissions/#{submission.id}/nits/#{comment.id}"
     assert_equal 0, Comment.count
