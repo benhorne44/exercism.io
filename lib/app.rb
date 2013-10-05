@@ -69,12 +69,12 @@ class ExercismApp < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= begin
-        if request.cookies['_exercism_login']
-          User.where(github_id: request.cookies['_exercism_login']).first
-        else
-          Guest.new
-        end
+      @current_user ||= logged_in_user || Guest.new
+    end
+
+    def logged_in_user
+      if request.cookies['_exercism_login']
+        User.where(github_id: request.cookies['_exercism_login']).first
       end
     end
 
