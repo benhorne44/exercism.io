@@ -296,8 +296,8 @@ class SubmissionsTest < Minitest::Test
       language: 'ruby',
       slug: 'word-count'
     }
-    s1 = Submission.create(data.merge(state: 'superseded', at: Time.now - 5))
-    s2 = Submission.create(data.merge(state: 'pending', at: Time.now - 2))
+    s1 = Submission.create(data.merge(state: 'superseded', created_at: Time.now - 5))
+    s2 = Submission.create(data.merge(state: 'pending', created_at: Time.now - 2))
 
     login(alice)
     post "/submissions/#{s1.id}/done"
